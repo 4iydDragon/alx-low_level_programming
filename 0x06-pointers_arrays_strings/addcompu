@@ -1,5 +1,5 @@
 #!/bin/bash
  git add .
-git commit -m 'Write a function that compares two strings'
+git commit -m 'Write a function that reverses the content of an array of integers.'
 
 git push
