@@ -1,20 +1,25 @@
 #include "main.h"
 #include <stdlib.h>
-#include <string.h>
 
-#define MAX_WORDS 1000
-
-char **strtow(char *str) {
-    if (str == NULL || strlen(str) == 0)
+/**
+ * strtow - Splits a string into words
+ * @str: The string to split
+ *
+ * Return: If str is NULL, empty, or memory allocation fails - NULL
+ *         Otherwise - a pointer to an array of strings (words)
+ */
+char **strtow(char *str)
+{
+    if (str == NULL || *str == '\0')
         return NULL;
 
-    char **words = (char **) malloc(sizeof(char *) * (MAX_WORDS + 1));
+    char **words = malloc(sizeof(char *) * (MAX_WORDS + 1));
     if (words == NULL)
         return NULL;
 
-    int word_count = 0;
-    int i = 0;
-    while (str[i] != '\0' && word_count < MAX_WORDS) {
+    int word_count = 0, i = 0;
+    while (str[i] != '\0' && word_count < MAX_WORDS)
+    {
         while (str[i] == ' ')
             i++;
         if (str[i] == '\0')
@@ -24,8 +29,9 @@ char **strtow(char *str) {
             i++;
         int end = i - 1;
         int length = end - start + 1;
-        char *word = (char *) malloc(sizeof(char) * (length + 1));
-        if (word == NULL) {
+        char *word = malloc(sizeof(char) * (length + 1));
+        if (word == NULL)
+        {
             for (int j = 0; j < word_count; j++)
                 free(words[j]);
             free(words);
@@ -37,7 +43,8 @@ char **strtow(char *str) {
     }
     words[word_count] = NULL;
 
-    if (word_count == 0) {
+    if (word_count == 0)
+    {
         free(words);
         return NULL;
     }
