@@ -1,39 +1,38 @@
-#include "main.h"
 #include <stdlib.h>
-#include <string.h>
-
+#include <stddef.h>
+/**
+ * argstostr - concatenates all arguments of a program
+ * @ac: argument count
+ * @av: argument vector
+ *
+ * Return: pointer to new string containing concatenated args,
+ *         or NULL if ac == 0 or av == NULL or on failure
+ */
 char *argstostr(int ac, char **av)
 {
-  int i, j, len = 0, total_len = 0;
-  char *str;
+	int i, j, len = 0, pos = 0;
+	char *str;
 
-  if (ac == 0 || av == NULL)
-    return NULL;
+	if (ac == 0 || av == NULL)
+		return (NULL);
 
-  /* Calculate total length of arguments */
-  for (i = 0; i < ac; i++) {
-    len = strlen(av[i]);
-    total_len += len;
-  }
+	for (i = 0; i < ac; i++)
+		for (j = 0; av[i][j]; j++)
+			len++;
+	str = malloc(sizeof(char) * (len + ac + 1));
+	if (str == NULL)
+		return (NULL);
+	for (i = 0; i < ac; i++)
+	{
+		for (j = 0; av[i][j]; j++)
+		{
+			str[pos] = av[i][j];
+			pos++;
+		}
+		str[pos] = '\n';
+		pos++;
+	}
+	str[pos] = '\0';
 
-  /* Add space for newlines and null terminator */
-  total_len += ac + 1;
-
-  /* Allocate memory for new string */
-  str = malloc(total_len * sizeof(char));
-  if (str == NULL)
-    return NULL;
-
-  /* Copy arguments into new string, separated by newlines */
-  len = 0;
-  for (i = 0; i < ac; i++) {
-    strcpy(str + len, av[i]);
-    len += strlen(av[i]);
-    *(str + len) = '\n';
-    len++;
-  }
-
-  *(str + len) = '\0';
-
-  return str;
+	return (str);
 }
