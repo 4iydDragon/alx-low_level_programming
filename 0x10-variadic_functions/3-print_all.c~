@@ -1,0 +1,86 @@
+#include "variadic_functions.h"
+
+/**
+ * print_char - prints a character
+ * @arg: the argument to print
+ */
+void print_char(va_list arg)
+{
+char c = va_arg(arg, int);
+printf("%c", c);
+}
+
+/**
+ * print_int - prints an integer
+ * @arg: the argument to print
+ */
+void print_int(va_list arg)
+{
+int i = va_arg(arg, int);
+printf("%d", i);
+}
+
+/**
+ * print_float - prints a float
+ * @arg: the argument to print
+ */
+void print_float(va_list arg)
+{
+float f = (float)va_arg(arg, double);
+printf("%f", f);
+}
+
+/**
+ * print_string - prints a string
+ * @arg: the argument to print
+ */
+void print_string(va_list arg)
+{
+char *s = va_arg(arg, char*);
+if (s == NULL)
+{
+printf("(nil)");
+}
+else
+{
+printf("%s", s);
+}
+}
+
+/**
+ * print_all - prints anything
+ * @format: the format string
+ */
+void print_all(const char * const format, ...)
+{
+va_list args;
+char *sep = "";
+unsigned int i = 0, j = 0;
+print_f format_arr[] = {
+{'c', print_char},
+{'i', print_int},
+{'f', print_float},
+{'s', print_string},
+{'\0', NULL}
+};
+
+va_start(args, format);
+while (format && format[i])
+{
+j = 0;
+while (format_arr[j].fmt)
+{
+if (format[i] == format_arr[j].fmt)
+{
+printf("%s", sep);
+format_arr[j].func(args);
+sep = ", ";
+break;
+}
+j++;
+}
+i++;
+}
+printf("\n");
+va_end(args);
+}
