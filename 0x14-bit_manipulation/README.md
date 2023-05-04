@@ -5,3 +5,6 @@
 3. 11
 4. 100
 5. 101
+advanced
+6. Endianness
+7. Crackme3
