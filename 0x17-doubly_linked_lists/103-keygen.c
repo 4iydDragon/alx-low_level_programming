@@ -42,4 +42,4 @@ int main(int argc, char *argv[])
 	p[5] = l[(b ^ 229) & 63];
 	printf("%s\n", p);
 	return (0);
-} 
+}
