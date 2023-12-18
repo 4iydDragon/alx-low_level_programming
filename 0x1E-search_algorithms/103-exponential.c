@@ -9,22 +9,22 @@
  */
 void print_array(int *array, int size)
 {
-        int i;
+int i;
 
-        if (array == NULL || size == 0)
-                return;
+if (array == NULL || size == 0)
+return;
 
-        printf("Searching in array: ");
+printf("Searching in array: ");
 
-        for (i = 0; i < size; i++)
-        {
-                if (i == 0)
-                        printf("%d", array[i]);
-                else
-                        printf(", %d", array[i]);
-        }
+for (i = 0; i < size; i++)
+{
+if (i == 0)
+printf("%d", array[i]);
+else
+printf(", %d", array[i]);
+}
 
-        printf("\n");
+printf("\n");
 }
 
 /**
@@ -37,30 +37,30 @@ void print_array(int *array, int size)
  */
 int binary_search(int *array, size_t size, int value)
 {
-        int low = 0;
-        int high = size - 1;
-        int mid;
+int low = 0;
+int high = size - 1;
+int mid;
 
-        if (array == NULL || size == 0)
-                return (-1);
+if (array == NULL || size == 0)
+return (-1);
 
-        while (low <= high)
-        {
-                mid = low + (high - low) / 2;
+while (low <= high)
+{
+mid = low + (high - low) / 2;
 
-                print_array(&array[low], (high - low) + 1);
+print_array(&array[low], (high - low) + 1);
 
-                if (array[mid] == value)
-                        return (mid);
+if (array[mid] == value)
+return (mid);
 
-                if (array[mid] > value)
-                        high = mid - 1;
+if (array[mid] > value)
+high = mid - 1;
 
-                else
-                        low = mid + 1;
-        }
+else
+low = mid + 1;
+}
 
-        return (-1);
+return (-1);
 }
 
 /**
@@ -74,30 +74,30 @@ int binary_search(int *array, size_t size, int value)
  */
 int exponential_search(int *array, size_t size, int value)
 {
-        int lower_bound;
-        int upper_bound = 1;
-        int value_position;
+int lower_bound;
+int upper_bound = 1;
+int value_position;
 
-        if (array == NULL || size == 0)
-                return (-1);
+if (array == NULL || size == 0)
+return (-1);
 
-        while (upper_bound < (int)size && array[upper_bound] < value)
-        {
-                printf("Value checked array[%d] = [%d]\n", upper_bound, array[upper_bound]);
-                lower_bound = upper_bound;
-                upper_bound *= 2;
-        }
+while (upper_bound < (int)size && array[upper_bound] < value)
+{
+printf("Value checked array[%d] = [%d]\n", upper_bound, array[upper_bound]);
+lower_bound = upper_bound;
+upper_bound *= 2;
+}
 
-        if (upper_bound >= (int)size)
-                upper_bound = size - 1;
+if (upper_bound >= (int)size)
+upper_bound = size - 1;
 
-        printf("Value found between indexes [%d] and [%d]\n", lower_bound,
-               upper_bound);
-        value_position = binary_search(&array[lower_bound],
-                                       upper_bound - lower_bound + 1, value);
+printf("Value found between indexes [%d] and [%d]\n", lower_bound,
+upper_bound);
+value_position = binary_search(&array[lower_bound],
+upper_bound - lower_bound + 1, value);
 
-        if (value_position != -1)
-                value_position += lower_bound;
+if (value_position != -1)
+value_position += lower_bound;
 
-        return (value_position);
+return (value_position);
 }
